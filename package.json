@@ -1,0 +1,15 @@
+{
+  "name": "graphql-start",
+  "version": "1.0.0",
+  "description": "Starter for GraphQL.",
+  "main": "src/index.js",
+  "repository": "https://github.com/ffekirnew/graphql-start.git",
+  "author": "ffekirnew <ffekirnew0808@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-graphql": "^0.12.0"
+  }
+}
