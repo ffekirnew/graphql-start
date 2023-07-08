@@ -1,5 +1,4 @@
-import { Friend } from './dbConnectors';
-import mongoose from 'mongoose';
+import { Friend } from '../../models/Friend';
 
 export const resolver = {
     Query: {
