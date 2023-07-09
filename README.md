@@ -81,6 +81,8 @@ Open your browser and go to `http://localhost:3000/graphql` Or the port you spec
 │   │   └── logger.js
 │   │   └── sqlite.js
 │   │   └── mongodb.js
+│   ├── graphql
+│   │   └── resolvers
 │   │   │   └── resolvers.js
 │   │   └── schema
 │   │   │   └── schema.js
