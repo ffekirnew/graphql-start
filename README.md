@@ -15,9 +15,7 @@ GraphQL-Start is a comprehensive starter kit and boilerplate repository that pro
 - [x] GraphQL
 - [x] Express.js
 - [x] MongoDB
-- [x] Mongoose
 - [x] SQLite
-- [x] Sequelize
 
 ## Getting Started
 
@@ -54,7 +52,7 @@ Add the following environment variables to the `.env` file.
 
 ```bash
 PORT=3000
-MONGO_URI=mongodb://localhost:27017/graphql-start
+MONGODB_URL=mongodb://localhost:27017/graphql-start
 ```
 
 #### 4. Start the server
@@ -80,12 +78,13 @@ Open your browser and go to `http://localhost:3000/graphql` Or the port you spec
 │   ├── app.js
 │   ├── config
 │   │   └── config.js
-|   |   └── logger.js
-│   ├── graphql
-│   │   ├── resolvers
+│   │   └── logger.js
+│   │   └── sqlite.js
+│   │   └── mongodb.js
 │   │   │   └── resolvers.js
 │   │   └── schema
-│   │       └── schema.js
+│   │   │   └── schema.js
+│   │   └── index.js
 │   ├── index.js
 │   └── models
 │       └── Friend.js
@@ -102,15 +101,19 @@ const User = require("./models/User");
 
 This file is used to initialize the express.js application.
 
-##### `config/index.js`
+##### `config/`
 
-This file is used to initialize the environment variables.
+This folder is used to initialize configurations for the project. The `config/config.js` file, especially, is used to initialize the environment variables. It uses the [dotenv](https://www.npmjs.com/package/dotenv) package.
 
-##### `graphql/resolvers/index.js`
+##### `graphql/resolvers/resolvers.js`
 
 This file is used to initialize the GraphQL resolvers.
 
-##### `graphql/schema/index.js`
+##### `graphql/schema/schema.js`
+
+This file is used to initialize the GraphQL type definitions.
+
+##### `graphql/index.js`
 
 This file is used to initialize the GraphQL schema.
 
@@ -118,9 +121,9 @@ This file is used to initialize the GraphQL schema.
 
 This file is used to initialize the server.
 
-##### `models/index.js`
+##### `models/`
 
-This file is used to initialize the Mongoose models.
+This folder is used to initialize the Mongoose models.
 
 #### Adding a new model
 
