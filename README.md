@@ -16,6 +16,8 @@ GraphQL-Start is a comprehensive starter kit and boilerplate repository that pro
 - [x] Express.js
 - [x] MongoDB
 - [x] Mongoose
+- [x] SQLite
+- [x] Sequelize
 
 ## Getting Started
 

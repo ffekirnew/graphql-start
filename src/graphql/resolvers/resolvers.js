@@ -1,30 +1,52 @@
 import { Friend } from '../../models/Friend';
+import { Alien } from '../../models/Alien';
 
-export const resolver = {
-    Query: {
-        getFriend: ({ id }) => {
-          return new Friend(id, friendDatabase[id]);
-        },
+const resolvers = {
+  Query: {
+    getFriends: async () => {
+      return await Friend.find({});
     },
-    Mutation: {
-        createFriend: ({ input }) => {
-          const newFriend = new Friend({
-            firstName: input.firstName,
-            lastName: input.lastName,
-            gender: input.gender,
-            age: input.age,
-            language: input.language,
-            emails: input.emails
-          });
-
-          newFriend.id = newFriend._id;
-
-          return new Promise((resolve, object) => {
-            newFriend.save((err) => {
-              if (err) reject(err)
-              else resolve(newFriend)
-            })
-          });
-        },
+    getOneFriend: async (root, { id }) => {
+      return await Friend.findById(id)
     },
+    getAliens: async () => {
+      return await Alien.findAll();
+    },
+    getOneAlien: async (root, { id }) => {
+      return await Alien.findById(id)
+    }
+  },
+
+  Mutation: {
+    createFriend: async (root, { input }) => {
+      try {
+        return await Friend.create(input);
+      } catch (err) {
+        throw new Error('Error creating friend.');
+      }
+    },
+
+    updateFriend: async (root, { input }) => {
+      try {
+        return await Friend.findOneAndUpdate({ _id: input.id }, input, { new: true });
+      } catch (err) {
+        throw new Error('Error updating friend.');
+      }
+    },
+
+    deleteFriend: async (root, { id }) => {
+      try {
+        const deleted = await Friend.findOneAndDelete({ _id: id });
+        if (!deleted) {
+          throw new Error('Error deleting friend');
+        }
+
+        return "Successfully deleted friend.";
+      } catch (err) {
+        throw new Error('Error deleting friend.');
+      }
+    },
+  },
 };
+
+export { resolvers };

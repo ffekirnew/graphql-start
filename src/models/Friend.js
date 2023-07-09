@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const friendSchema = new mongoose.Schema({
     firstName: {
         type: String,
+        unique: true,
     },
     lastName: {
         type: String,

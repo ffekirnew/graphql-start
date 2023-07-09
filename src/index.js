@@ -1,18 +1,18 @@
+import { app } from "./app";
+
 import { config } from "./config/config";
 import { logger } from "./config/logger";
-import { app } from "./app";
-import mongoose from "mongoose";
+import { mongooseConnection } from "./config/mongodb";
+import { sequelize } from "./config/sqlite";
 
 let server;
-
-// Mongoose Connection
-mongoose.Promise = global.Promise;
-mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
-  logger.info('Connected to MongoDB');
+mongooseConnection.once('open', () => {
+  logger.info('Connected to MongoDB.');
   server = app.listen(config.port, () => {
-    logger.info(`Listening to port ${config.port}`);
+    logger.info(`Listening on port ${config.port}.`);
   });
 });
+
 
 // Exit Handler
 const exitHandler = () => {

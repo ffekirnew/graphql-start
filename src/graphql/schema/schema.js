@@ -1,7 +1,4 @@
-import { makeExecutableSchema } from 'graphql-tools';
-import resolver from '../resolvers/resolvers';
-
-const typeDefs = `
+const typeDefs = /* GraphQL */`
   type Email {
     email: String
   }
@@ -13,12 +10,26 @@ const typeDefs = `
 
   type Friend {
     id: ID
-    firstName: String
+    firstName: String!
     lastName: String
     gender: Gender
     age: Int
     language: String
     emails: [Email]
+  }
+
+  type Alien {
+    id: ID
+    firstName: String
+    lastName: String
+    planet: String
+  }
+
+  input AlienInput {
+    id: ID
+    firstName: String
+    lastName: String
+    planet: String
   }
 
   input EmailInput {
@@ -36,13 +47,17 @@ const typeDefs = `
   }
 
   type Query {
-    getFriend(id: ID): Friend
+    getFriends: [Friend]
+    getOneFriend(id: ID!): Friend
+    getAliens: [Alien]
+    getOneAlien(id: ID!): Alien
   }
 
   type Mutation {
     createFriend(input: FriendInput): Friend
+    updateFriend(input: FriendInput): Friend
+    deleteFriend(id: ID!): String
   }
 `;
 
-const schema = makeExecutableSchema({ typeDefs, resolver });
-export { schema };
+export { typeDefs };
